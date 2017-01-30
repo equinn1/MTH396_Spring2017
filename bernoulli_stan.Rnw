@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\begin{document}
+
+<<>>=                                      #standard setup for Stan
+library(rstan)
+library(bayesplot)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+@
+
+<<>>=   #Bernoulli credible intervals
+N = 40                                 #sample size 
+
+p=0.1                                 #probability of success p
+
+#y = rbinom(N,1,p)                     #generate the sample
+y = rep(0,N)
+y
+
+shape1=1                              #shape parameters for beta prior
+shape2=1
+prior_sd=1
+@
+
+
+<<>>=
+library(shinystan)
+stanfit = stan("Bernoulli_normal.stan")         #call stan to fit the model
+launch_shinystan(stanfit)
+print(stanfit)                           #print a summary of the results
+@
+
+
+<<>>=
+print(get_stanmodel(stanfit))
+@
+\end{document}
