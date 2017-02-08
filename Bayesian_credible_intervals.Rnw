@@ -1,0 +1,164 @@
+\documentclass{article}
+
+\begin{document}
+
+\section*{Bayesian credible intervals in-class exercise}
+
+\subsection*{Common setup code}
+<<>>=                                      #standard setup for Stan
+library(rstan)
+library(shinystan)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+@
+\subsection*{Read the data}
+<<>>=
+df = read.csv("Bayesian_credible_intervals.csv")           #read the data file
+str(df)                                                    #display the structure
+N = nrow(df)                                               #set N to the number of rows of data
+@
+
+\subsection*{The beta distribution}
+
+Generate point estimates and 95\% credible intervals for the parameters of a beta distribution
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  Use a half-normal prior for alpha with mean 0 and standard deviation 20
+\item  Use a half-normal prior for beta with mean 0 and standard deviation 20
+\end{itemize}
+\par\vspace{0.4 cm}
+You can use the model file \texttt{beta.stan}
+<<>>=
+y = df$y_beta
+
+stanfit = stan("beta.stan")              #call stan to fit the model
+print(get_stanmodel(stanfit))            #list the model file
+print(stanfit)                           #print a summary of the results
+@
+
+\subsection*{The gamma distribution}
+
+Generate point estimates and 95\% credible intervals for the parameters of a gamma distribution
+\par\vspace{0.4 cm}
+Create a new model file \texttt{gamma.stan} patterned after \texttt{beta.stan} with:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  A positive parameter alpha
+\item  A positive parameter beta
+\item  Stan likelihood function \texttt{gamma()}   (see the language reference manual for the syntax)
+\end{itemize}
+\par\vspace{0.4 cm}
+Priors:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  Use a half-normal prior for alpha with mean 0 and standard deviation 20
+\item  Use a half-normal prior for beta with mean 0 and standard deviation 20
+\end{itemize}
+
+<<>>=
+y = df$y_gamma
+                            #fill in the rest
+@
+
+\subsection*{The exponential distribution}
+
+Generate a point estimate and 95\% credible interval for the parameter theta of an exponential distribution
+\par\vspace{0.4 cm}
+Create a new model file \texttt{exponential.stan} patterned after \texttt{beta.stan} with:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  A positive parameter theta
+\item  Stan likelihood function \texttt{exponential()}   (see the language reference manual for the syntax)
+\end{itemize}
+\par\vspace{0.4 cm}
+Priors:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  Use a half-normal prior for theta with mean 0 and standard deviation 20
+\end{itemize}
+
+<<>>=
+y = df$y_exponential
+                            #fill in the rest
+@
+
+\subsection*{The Poisson distribution}
+
+Generate a point estimate and 95\% credible interval for the parameter lambda of a Poisson distribution
+\par\vspace{0.4 cm}
+Create a new model file \texttt{poisson.stan} patterned after \texttt{beta.stan} with:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  A data vector y of type int  (previous distributions were continuous so type was real)
+\item  A positive parameter lambda
+\item  Stan likelihood function \texttt{poisson()}   (see the language reference manual for the syntax)
+\end{itemize}
+\par\vspace{0.4 cm}
+Priors:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  Use a half-normal prior for lambda with mean 0 and standard deviation 20
+\end{itemize}
+
+<<>>=
+y = df$y_poisson
+                            #fill in the rest
+@
+
+\subsection*{The binomial distribution}
+
+Generate a point estimate and 95\% credible interval for the parameter p of a binomial distribution given that $n=10$
+\par\vspace{0.4 cm}
+Create a new model file \texttt{binomial.stan} patterned after \texttt{poisson.stan} with:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  A data vector y of type int  
+\item  A positive parameter p constrained to be between 0 and 1
+\item  Stan likelihood function \texttt{binomial(10,p)}   
+\end{itemize}
+\par\vspace{0.4 cm}
+Priors:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  Use a uniform prior for p on (0,1)
+\end{itemize}
+
+<<>>=
+y = df$y_binom
+                            #fill in the rest
+@
+
+
+\subsection*{The negative binomial distribution (alternative parameterization)}
+
+Last semester we parameterized the negative binomial distribution with an integer $n$ and a probability of success $p$.
+\par\vspace{0.4 cm}
+An alternative (and more general) parameterization is possible with two positive parameters, $\alpha$ and $\beta$:
+\[
+f(y|\alpha,\beta) = {y+\alpha-1\choose \alpha-1}\left(\frac{\beta}{\beta+1}\right)^{\alpha}\left(\frac{1}{1+\beta}\right)^y
+\]
+
+
+Generate a point estimate and 95\% credible interval for the parameters alpha and beta of a negative binomial distribution 
+\par\vspace{0.4 cm}
+Create a new model file \texttt{nbinom.stan} patterned after \texttt{neg\_binomial.stan} with:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  A data vector y of type int  
+\item  A positive parameter alpha
+\item  A positive parameter beta
+\item  Stan likelihood function \texttt{neg\_binomial(alpha,beta)}   
+\end{itemize}
+\par\vspace{0.4 cm}
+Priors:
+\par\vspace{0.4 cm}
+\begin{itemize}
+\item  Use a half-normal prior with a mean of 0 and standard deviation of 20 for alpha
+\item  Use a half-normal prior with a mean of 0 and standard deviation of 20 for beta
+\end{itemize}
+
+<<>>=
+y = df$y_nbinom
+                            #fill in the rest
+@
+\end{document}
