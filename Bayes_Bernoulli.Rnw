@@ -1,0 +1,48 @@
+\documentclass{article}
+
+\begin{document}
+
+<<>>=                                      #standard setup for Stan
+library(rstan)
+library(bayesplot)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+@
+\section*{The Poisson Distribution}
+The Poisson distribution is a model for a random process that produces non-negative integer values.
+\par\vspace{0.4 cm}
+That is, a Poisson model produces values in the set $\{0,1,2,3,\ldots\}$.
+\par\vspace{0.4 cm}
+The Poisson distribution is useful for modeling data that represents counts.
+\par\vspace{0.4 cm}
+The Poisson distribution is a single-parameter distribution.  The parameter is usually denoted by $\lambda$ and must be positive.
+\par\vspace{0.4 cm}
+\subsection*{Generating data with the Poisson model}
+
+<<>>=   #Generate some values from a Poisson distribution
+set.seed(12345)
+N = 25                                 #sample size 
+
+p=0.4                                  #probability of success p
+
+y = rbinom(N,1,p)                      #generate binary values
+y
+sum(y)
+
+prior_alpha = 1                        #beta prior shape parameter 1
+prior_beta  = 1                        #beta prior shape parameter 2
+@
+
+
+<<>>=
+library(shinystan)
+stanfit = stan("Bernoulli.stan")         #call stan to fit the model
+launch_shinystan(stanfit)
+print(stanfit)                           #print a summary of the results
+@
+
+
+<<>>=
+print(get_stanmodel(stanfit))
+@
+\end{document}
