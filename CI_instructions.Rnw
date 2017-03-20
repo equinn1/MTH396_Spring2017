@@ -1,0 +1,14 @@
+\documentclass{article}
+
+\begin{document}
+\section*{Bayesian confidence interval exercise}
+\par\vspace{1 cm}\noindent
+\textbf{1)} The data in \texttt{MTH396\_CI\_exercise\_data1.csv} is from a gamma distribution.  Find point estimates and 95\% confidence intervals for the parameters $\alpha$ and $\beta$.
+\par\vspace{1 cm}\noindent
+\textbf{2)} The data in \texttt{MTH396\_CI\_exercise\_data2.csv} is from a gamma distribution with $\alpha=3$.  Find point estimates and 95\% confidence intervals for the parameter $\beta$.
+\par\vspace{1 cm}\noindent
+\textbf{3)} The data in \texttt{MTH396\_CI\_exercise\_data3.csv} is from a Poisson distribution.  Find a point estimate and 95\% confidence interval for the parameter $\lambda$.
+\par\vspace{1 cm}\noindent
+\textbf{4)} The data in \texttt{MTH396\_CI\_exercise\_data4.csv} is from a beta distribution.  Find point estimates and 95\% confidence intervals for the parameters $\alpha$ and $\beta$.
+
+\end{document}
