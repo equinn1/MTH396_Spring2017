@@ -1,0 +1,32 @@
+\documentclass{article}
+
+\begin{document}
+\section*{Bayesian confidence interval assignment}
+\par\vspace{0.4 cm}
+Use Stan to answer the following questions using the data provided.  You can start with the \texttt{.stan} file 
+from the in-class exercise on Bayesian confidence intervals.
+\par\vspace{0.4 cm}
+Use the Stan Language Manual at \texttt{http://mc-stan.org/documentation/} as a reference to find the appropriate likelihood function name in Stan.
+\par\vspace{0.4 cm}
+\textbf{1)} The data in \texttt{MTH396\_CI\_assignment\_data1.csv} is from a Weibull distribution.
+\begin{itemize}
+\item Use uniform priors on $(0,8)$ for $\alpha$ and $\sigma$
+\item Find point estimates for the parameters $\alpha$ and $\sigma$
+\item Find a 95\% confidence interval for $\alpha$
+\item Find a 95\% confidence interval for $\sigma$
+\item Find a 95\% confidence interval for the median of the distribution
+\item Find a 95\% confidence interval for the $90^{th}$ percentile of the distribution
+\end{itemize}
+\par\vspace{1 cm}\noindent
+\textbf{2)} The data in \texttt{MTH396\_CI\_assignment\_data2.csv} is from a logistic distribution.
+\begin{itemize}
+\item Use a normal(0,20) prior for $\mu$
+\item Use a uniform prior on $(0,10)$ for $\sigma$
+\item Find point estimates for the parameters $\mu$ and $\sigma$
+\item Find a 95\% confidence interval for $\mu$
+\item Find a 95\% confidence interval for $\sigma$
+\item Find a 95\% confidence interval for the median of the distribution
+\item Find a 95\% confidence interval for the $25^{th}$ percentile of the distribution
+\end{itemize}
+
+\end{document}
