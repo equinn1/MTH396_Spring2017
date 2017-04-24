@@ -1,0 +1,38 @@
+\documentclass{article}
+
+\begin{document}
+
+<<>>=
+set.seed(1)
+
+library(rstan)
+library(shinystan)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+@
+
+<<>>=
+load('EPA_mileage.Rdata')
+ls()
+
+str(epa)
+
+y <- epa$mpg
+x <- epa$etw/1000
+N <- nrow(epa)
+
+stanfit <- stan('weighted_regression.stan')
+
+print(stanfit,pars=c('beta','sigma'))
+
+pd <- extract(stanfit)
+str(pd)
+
+print(get_stanmodel(stanfit))
+@
+
+<<>>=
+launch_shinystan(stanfit)
+@
+
+\end{document}
