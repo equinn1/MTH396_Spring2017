@@ -1,0 +1,23 @@
+\documentclass{article}
+
+\begin{document}
+
+\section*{In-class exercise: Single factor ANOVA with 3 levels}
+
+\par\vspace{0.3 cm}\noindent
+
+\par\vspace{1 cm}\noindent
+\textbf{1)}  What is the point estimate of $\alpha_1$, the mean for level 1?
+\par\vspace{1 cm}\noindent
+\textbf{2)}  What is the point estimate of $\alpha_2$, the mean for level 2?
+\par\vspace{1 cm}\noindent
+\textbf{3)}  What is the point estimate of $\alpha_3$, the mean for level 3?
+\par\vspace{1 cm}\noindent
+\textbf{4)}  What is the point estimate of $\alpha_1-\alpha_2$, the difference between level 1 and level 2?
+\par\vspace{1 cm}\noindent
+\textbf{5)}  What is the point estimate of $\alpha_1-\alpha_3$, the difference between level 1 and level 3?
+\par\vspace{1 cm}\noindent
+\textbf{6)}  What is the point estimate of $\alpha_2-\alpha_3$, the difference between level 2 and level 3?
+\par\vspace{1 cm}\noindent
+
+\end{document}
