@@ -1,0 +1,40 @@
+\documentclass{article}
+
+\begin{document}
+
+Estimate the parameters of a normal population from a sample
+
+<<>>=                                      #standard setup for Stan
+library(rstan)
+library(bayesplot)
+rstan_options(auto_write = TRUE)
+options(mc.cores = parallel::detectCores())
+@
+
+<<>>=   #Generate artificial data
+N      <- 40                                 #sample size 
+
+mu     <- 25                                 #mean parameter
+
+sigma  <- 10                                 #standard deviation
+
+y = rnorm(N,mu,sigma)                        #generate the sample
+@
+
+
+<<>>=
+stanfit = stan("normal.stan")         #call stan to fit the model
+print(stanfit)                           #print a summary of the results
+@
+
+
+<<>>=
+print(get_stanmodel(stanfit))
+
+pd <- extract(stanfit)
+
+mean(pd$mu)
+
+var(pd$mu)
+@
+\end{document}
